@@ -1,0 +1,13 @@
+{
+  "resourceManagerName": "Ravelaso.UiPath.Sqlite.Resources.Resources",
+  "activities": [
+    {
+      "fullName": "Ravelaso.UiPath.Sqlite.ActivityTemplate",
+      "shortName": "Template",
+      "displayNameKey": "ActivityTemplate_DisplayName",
+      "descriptionKey": "ActivityTemplate_Description",
+      "categoryKey": "Templates",
+      "viewModelType": "Ravelaso.UiPath.Sqlite.ViewModels.ActivityTemplateViewModel"
+    }
+  ]
+}

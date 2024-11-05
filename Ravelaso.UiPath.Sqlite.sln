@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravelaso.UiPath.Sqlite", "Ravelaso.UiPath.Sqlite\Ravelaso.UiPath.Sqlite.csproj", "{3237E53E-DC06-42ED-8CDD-D6BA2CD16314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravelaso.UiPath.Sqlite.Packaging", "Ravelaso.UiPath.Sqlite.Packaging\Ravelaso.UiPath.Sqlite.Packaging.csproj", "{61443EDA-9898-4A5E-AABA-8548B29BAF87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravelaso.UiPath.Sqlite.Tests", "Ravelaso.UiPath.Sqlite.Tests\Ravelaso.UiPath.Sqlite.Tests.csproj", "{6F19FCA1-CC4B-4822-B3FE-9232E0EFB349}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3237E53E-DC06-42ED-8CDD-D6BA2CD16314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3237E53E-DC06-42ED-8CDD-D6BA2CD16314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3237E53E-DC06-42ED-8CDD-D6BA2CD16314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3237E53E-DC06-42ED-8CDD-D6BA2CD16314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61443EDA-9898-4A5E-AABA-8548B29BAF87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61443EDA-9898-4A5E-AABA-8548B29BAF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61443EDA-9898-4A5E-AABA-8548B29BAF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61443EDA-9898-4A5E-AABA-8548B29BAF87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F19FCA1-CC4B-4822-B3FE-9232E0EFB349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F19FCA1-CC4B-4822-B3FE-9232E0EFB349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F19FCA1-CC4B-4822-B3FE-9232E0EFB349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F19FCA1-CC4B-4822-B3FE-9232E0EFB349}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
