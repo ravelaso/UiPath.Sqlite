@@ -8,7 +8,7 @@ public class SqliteHelper
     public static SQLiteConnection CreateConnection(string databasePath)
     {
         Validate.ValidateConnection(databasePath);
-        var conn = new SQLiteConnection("Data Source=" + databasePath + ";Version=3;");
+        var conn = new SQLiteConnection("Data Source=" + databasePath);
         conn.Open();
         return conn;
     }

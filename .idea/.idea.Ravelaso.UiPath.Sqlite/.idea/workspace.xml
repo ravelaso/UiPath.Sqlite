@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="312be239-7ad8-406f-9d77-b50ff244e702" name="Changes" comment="idea">
+    <list default="true" id="312be239-7ad8-406f-9d77-b50ff244e702" name="Changes" comment="changes to SystemData">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ravelaso.UiPath.Sqlite/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ravelaso.UiPath.Sqlite/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite.Packaging/Ravelaso.UiPath.Sqlite.Packaging.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite.Packaging/Ravelaso.UiPath.Sqlite.Packaging.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite.Tests/Ravelaso.UiPath.Sqlite.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite.Tests/Ravelaso.UiPath.Sqlite.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/ActivityTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/ActivityTemplate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Resources/ActivitiesMetadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Resources/ActivitiesMetadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Resources/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Resources/Resources.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Resources/Resources.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/Resources/Resources.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/SqliteHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/SqliteHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/ViewModels/ActivityTemplateViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Ravelaso.UiPath.Sqlite/ViewModels/ActivityTemplateViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +31,14 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Data/Dev/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite/Resources/ActivitiesMetadata.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Dev/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite/Resources/Resources.Designer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Dev/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite/Resources/Resources.Designer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Dev/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite/Resources/Resources.resx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Dev/Ravelaso.UiPath.Sqlite/Ravelaso.UiPath.Sqlite/Resources/Resources.resx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/27a204731cdb4e1a82ae0265be145b5311fa00/a0/4f41cfee/OutArgument`1.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -72,7 +72,7 @@
       <updated>1730816550123</updated>
       <workItem from="1730816551263" duration="2027000" />
       <workItem from="1730874740401" duration="3320000" />
-      <workItem from="1730885417420" duration="3730000" />
+      <workItem from="1730885417420" duration="5498000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -90,17 +90,27 @@
       <option name="project" value="LOCAL" />
       <updated>1730818592552</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changes to SystemData">
+      <option name="closed" value="true" />
+      <created>1730889788271</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730889788271</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="init" />
     <MESSAGE value="idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="idea" />
+    <MESSAGE value="changes to SystemData" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes to SystemData" />
   </component>
 </project>
