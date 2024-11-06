@@ -3,10 +3,10 @@
   "activities": [
     {
       "fullName": "Ravelaso.UiPath.Sqlite.ActivityTemplate",
-      "shortName": "Template",
+      "shortName": "RavelasoSqlite",
       "displayNameKey": "ActivityTemplate_DisplayName",
       "descriptionKey": "ActivityTemplate_Description",
-      "categoryKey": "Templates",
+      "categoryKey": "Database",
       "viewModelType": "Ravelaso.UiPath.Sqlite.ViewModels.ActivityTemplateViewModel"
     }
   ]

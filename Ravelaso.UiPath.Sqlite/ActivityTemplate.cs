@@ -1,25 +1,10 @@
 ﻿using System.Activities;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using Microsoft.Data.Sqlite;
-
+using System.Data.SQLite;
 namespace Ravelaso.UiPath.Sqlite
 {
-    public class ActivityTemplate : CodeActivity 
-    {
-       
-        protected override void Execute(CodeActivityContext context)
-        {
-            ExecuteInternal();
-        }
-
-        public void ExecuteInternal()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
+    
     [DisplayName("CreateConnection")]
     [Description("Creates a connection object for the SQLite database")]
     public class CreateConnection : CodeActivity
@@ -32,7 +17,7 @@ namespace Ravelaso.UiPath.Sqlite
         [RequiredArgument]
         [Category("Database")]
         [Description("The database connection object")]
-        public OutArgument<SqliteConnection> Connection { get; set; }
+        public OutArgument<SQLiteConnection> Connection { get; set; }
         
         protected override void Execute(CodeActivityContext context)
         {
@@ -52,7 +37,7 @@ namespace Ravelaso.UiPath.Sqlite
         [RequiredArgument]
         [Category("Database")]
         [Description("The database connection object")]
-        public InArgument<SqliteConnection> Connection { get; set; }
+        public InArgument<SQLiteConnection> Connection { get; set; }
         
         [RequiredArgument]
         [Category("Database")]
@@ -61,6 +46,25 @@ namespace Ravelaso.UiPath.Sqlite
         protected override void Execute(CodeActivityContext context)
         {
             Output.Set(context, SqliteHelper.ExecuteQuery(context.GetValue(Connection), context.GetValue(Query)));
+        }
+    }
+
+    [DisplayName("ExecuteNonQuery")]
+    [Description("Executes a non query command using a database connection")]
+    public class ExecuteNonQuery : CodeActivity
+    {
+        [RequiredArgument]
+        [Category("Database")]
+        [Description("The sql non query command")]
+        public InArgument<string> Command { get; set; }
+        
+        [RequiredArgument]
+        [Category("Database")]
+        [Description("The database connection object")]
+        public InArgument<SQLiteConnection> Connection { get; set; }
+        protected override void Execute(CodeActivityContext context)
+        {
+            SqliteHelper.ExecuteNonQuery(context.GetValue(Command), context.GetValue(Connection));
         }
     }
     

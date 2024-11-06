@@ -1,21 +1,19 @@
 using System.Data;
-using System.Data.Common;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.Data.Sqlite;
-using static System.Data.DataTable;
+using System.Data.SQLite;
+
 namespace Ravelaso.UiPath.Sqlite;
 
 public class SqliteHelper
 {
-    public static SqliteConnection CreateConnection(string databasePath)
+    public static SQLiteConnection CreateConnection(string databasePath)
     {
         Validate.ValidateConnection(databasePath);
-        var conn = new SqliteConnection("Data Source=" + databasePath + ";Version=3;");
+        var conn = new SQLiteConnection("Data Source=" + databasePath + ";Version=3;");
         conn.Open();
         return conn;
     }
-
-    public static DataTable ExecuteQuery(SqliteConnection conn, string sql)
+    
+    public static DataTable ExecuteQuery(SQLiteConnection conn, string sql)
     {
         if (conn == null && string.IsNullOrWhiteSpace(sql))
             throw new Exception("You need to to fill all parameters");
@@ -23,13 +21,25 @@ public class SqliteHelper
         {
             conn.Open();
         }
-        SqliteCommand cmd = new SqliteCommand(sql, conn);
-        using SqliteDataReader dr = cmd.ExecuteReader();
+        var cmd = new SQLiteCommand(sql, conn);
+        using var dr = cmd.ExecuteReader();
         var dt = new DataTable();
         dt.BeginLoadData();
         dt.Load(dr);
         dt.EndLoadData();
         return dt;
+    }
+    
+    public static void ExecuteNonQuery(string command, SQLiteConnection conn)
+    {
+        if (conn == null && string.IsNullOrWhiteSpace(command))
+            throw new Exception("You need to to fill all parameters");
+        if (conn!.State == ConnectionState.Closed)
+        {
+            conn.Open();
+        }
+        var cmd = new SQLiteCommand(command, conn);
+        cmd.ExecuteNonQuery();
     }
 }
 
