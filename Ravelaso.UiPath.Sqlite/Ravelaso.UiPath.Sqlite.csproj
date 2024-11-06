@@ -16,13 +16,19 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10"/>
         <PackageReference Include="System.Activities.ViewModels" Version="1.0.0-20230919.1"/>
-        <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
+        <PackageReference Include="System.Data.SQLite" Version="1.0.119" PrivateAssets="none"/>
+        <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" PrivateAssets="none"/>
         <PackageReference Include="UiPath.Activities.Api" Version="23.10.3" PrivateAssets="All"/>
         <PackageReference Include="UiPath.Workflow" Version="6.0.0-20231211-03"/>
     </ItemGroup>
-
+    <PropertyGroup>
+        <ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
+        <CopySQLiteInteropFiles>false</CopySQLiteInteropFiles>
+        <CleanSQLiteInteropFiles>false</CleanSQLiteInteropFiles>
+        <CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
+    </PropertyGroup>
     <ItemGroup>
         <Compile Update="Resources\Resources.Designer.cs">
             <DependentUpon>Resources.resx</DependentUpon>

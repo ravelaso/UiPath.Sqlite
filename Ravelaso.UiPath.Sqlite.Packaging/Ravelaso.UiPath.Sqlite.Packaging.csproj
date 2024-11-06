@@ -13,8 +13,8 @@
         <PackageId>Ravelaso.UiPath.Sqlite</PackageId>
         <VersionPrefix Condition="'$(Configuration)' == 'Release'">1.0.0</VersionPrefix>
         <VersionPrefix Condition="'$(Configuration)' == 'Debug'">1.0.$(VersionBuild)-dev.$(VersionRevision)</VersionPrefix>
-        <Authors>UiPath</Authors>
-        <PackageTags>UiPathActivities</PackageTags>
+        <Authors>Ravelaso</Authors>
+        <PackageTags>UiPathDatabase</PackageTags>
         <Product>Ravelaso.UiPath.Sqlite.Packaging</Product>
         <PackageIcon>UI_icon.png</PackageIcon>
         <PackageOutputPath>..\Output\Activities\Packages\</PackageOutputPath>
@@ -32,11 +32,11 @@
         </ItemGroup>
     </Target>
 
-    <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">
-        <ItemGroup>
-            <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)"/>
-        </ItemGroup>
-    </Target>
+<!--    <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">-->
+<!--        <ItemGroup>-->
+<!--            <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)"/>-->
+<!--        </ItemGroup>-->
+<!--    </Target>-->
 
     <Target Name="CleanPackageFiles" BeforeTargets="Build">
         <Message Text="Deleting packages ..."/>
@@ -55,6 +55,13 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
-      <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
+      <PackageReference Include="System.Data.SQLite" Version="1.0.119" PrivateAssets="none"/>
+      <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" PrivateAssets="none"/>
     </ItemGroup>
+    <PropertyGroup>
+        <ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
+        <CopySQLiteInteropFiles>false</CopySQLiteInteropFiles>
+        <CleanSQLiteInteropFiles>false</CleanSQLiteInteropFiles>
+        <CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
+    </PropertyGroup>
 </Project>
