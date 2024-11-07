@@ -13,7 +13,7 @@ public class CreateConnection : CodeActivity
     [Category("Database")]
     [Description("The name of the SQLite database")]
     public InArgument<string> DatabasePath { get; set; }
-
+    
     [RequiredArgument]
     [Category("Database")]
     [Description("The database connection object")]
@@ -63,7 +63,7 @@ public class ExecuteNonQuery : CodeActivity
     [Category("Database")]
     [Description("The database connection object")]
     public InArgument<SQLiteConnection> Connection { get; set; }
-
+    
     protected override void Execute(CodeActivityContext context)
     {
         SqliteHelper.ExecuteNonQuery(context.GetValue(Command), context.GetValue(Connection));
