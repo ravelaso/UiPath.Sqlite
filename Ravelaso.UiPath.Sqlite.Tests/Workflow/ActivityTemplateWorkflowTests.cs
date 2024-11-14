@@ -15,7 +15,7 @@ namespace Ravelaso.UiPath.Sqlite.Tests.Workflow
             {
                 DatabasePath = new InArgument<string>(databasePath)
             };
-
+            
             var workflowInvoker = new WorkflowInvoker(createConnectionActivity);
 
             // Act & Assert
