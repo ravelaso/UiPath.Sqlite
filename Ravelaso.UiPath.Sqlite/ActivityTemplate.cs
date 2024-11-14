@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
+using Ravelaso.UiPath.Sqlite.Helpers;
+using UiPath.Robot.Activities.Api;
 
 namespace Ravelaso.UiPath.Sqlite;
 
@@ -25,6 +28,38 @@ public class CreateConnection : CodeActivity
     }
 }
 
+public class CloseConnection : CodeActivity
+{
+    [RequiredArgument]
+    [Category("Database")]
+    [Description("The database connection object")]
+    public InArgument<SQLiteConnection> Connection { get; set; }
+    protected override void Execute(CodeActivityContext context)
+    {
+        try
+        {
+            SqliteHelper.CloseConnection(context.GetValue(Connection));
+        }
+        catch (Exception ex)
+        {
+            var message = new LogMessage
+            {
+                EventType = TraceEventType.Error,
+                Message = ex.Message
+            };
+            context.GetExecutorRuntime().LogMessage(message);
+        }
+    }
+}
+
+public class InsertData : CodeActivity
+{
+    
+    protected override void Execute(CodeActivityContext context)
+    {
+        throw new NotImplementedException();
+    }
+}
 [DisplayName("ExecuteQuery")]
 [Description("Returns a DataTable from a query to the database connection")]
 public class ExecuteQuery : CodeActivity
@@ -38,7 +73,7 @@ public class ExecuteQuery : CodeActivity
     [Category("Database")]
     [Description("The database connection object")]
     public InArgument<SQLiteConnection> Connection { get; set; }
-
+    
     [RequiredArgument]
     [Category("Database")]
     [Description("The result DataTable")]

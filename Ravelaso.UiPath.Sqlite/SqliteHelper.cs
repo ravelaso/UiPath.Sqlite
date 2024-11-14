@@ -3,16 +3,20 @@ using System.Data.SQLite;
 
 namespace Ravelaso.UiPath.Sqlite;
 
-public class SqliteHelper
+public static class SqliteHelper
 {
     public static SQLiteConnection CreateConnection(string databasePath)
     {
-        Validate.ValidateConnection(databasePath);
-        var conn = new SQLiteConnection("Data Source=" + databasePath);
+        var conn = new SQLiteConnection($"Data Source={databasePath}");
+        conn.ParseViaFramework = true;
         conn.Open();
         return conn;
     }
-    
+
+    public static void CloseConnection(SQLiteConnection conn)
+    {
+        if(conn.State != ConnectionState.Closed) conn?.Close();
+    }
     public static DataTable ExecuteQuery(SQLiteConnection conn, string sql)
     {
         if (conn == null && string.IsNullOrWhiteSpace(sql))
@@ -29,7 +33,17 @@ public class SqliteHelper
         dt.EndLoadData();
         return dt;
     }
-    
+
+    public static void InsertData(SQLiteConnection conn, DataTable dt)
+    {
+        if (conn == null)
+            throw new Exception("You need to to fill all parameters");
+        if (conn!.State == ConnectionState.Closed)
+        {
+            conn.Open();
+        }
+        
+    }
     public static void ExecuteNonQuery(string command, SQLiteConnection conn)
     {
         if (conn == null && string.IsNullOrWhiteSpace(command))
