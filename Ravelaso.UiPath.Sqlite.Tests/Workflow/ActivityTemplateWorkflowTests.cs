@@ -10,7 +10,7 @@ namespace Ravelaso.UiPath.Sqlite.Tests.Workflow
         public void TestCreateConnection()
         {
             // Arrange
-            var databasePath = @"\\prg-dc.dhl.com\nl_exp\NLMST\ACC_Parcel\RPA\UiPath\Testomgeving\AndresDev\database.db";
+            var databasePath = @"C:\Data\Dev\database.db";
             var createConnectionActivity = new CreateConnection
             {
                 DatabasePath = new InArgument<string>(databasePath)
