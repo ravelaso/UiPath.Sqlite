@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.SQLite;
+using System.Text;
 
 namespace Ravelaso.UiPath.Sqlite;
 
@@ -34,15 +35,64 @@ public static class SqliteHelper
         return dt;
     }
 
-    public static void InsertData(SQLiteConnection conn, DataTable dt)
+    public static void InsertDataTable(SQLiteConnection conn, DataTable dt, string tableName)
     {
         if (conn == null)
-            throw new Exception("You need to to fill all parameters");
+        {
+            throw new Exception("You need to provide a db connection.");
+        }
+        
+        if (!dt.Rows.Count.Equals(0))
+        {
+            throw new Exception($"Number of rows must be equal to zero.");
+        }
+        
         if (conn!.State == ConnectionState.Closed)
         {
             conn.Open();
         }
-        
+        using var transaction = conn.BeginTransaction();
+        try
+        {
+            
+            using (var command = conn.CreateCommand())
+            {
+                var columnNames = new StringBuilder();
+                var parameterNames = new StringBuilder();
+                
+                foreach (DataColumn column in dt.Columns)
+                {
+                    if (columnNames.Length > 0)
+                    {
+                        columnNames.Append(", ");
+                        parameterNames.Append(", ");
+                    }
+                    columnNames.Append(column.ColumnName);
+                    parameterNames.Append($"@{column.ColumnName}");
+                }
+                
+                command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
+                
+                foreach (DataRow row in dt.Rows)
+                {
+                    command.Parameters.Clear();
+                    
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        command.Parameters.AddWithValue($"@{column.ColumnName}", row[column]);
+                    }
+                    
+                    command.ExecuteNonQuery();
+                }
+            }
+            
+            transaction.Commit();
+        }
+        catch (Exception ex)
+        {
+            transaction.Rollback();
+            throw;
+        }
     }
     public static void ExecuteNonQuery(string command, SQLiteConnection conn)
     {

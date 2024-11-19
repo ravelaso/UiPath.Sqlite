@@ -16,7 +16,7 @@ public class CreateConnection : CodeActivity
     [Category("Database")]
     [Description("The name of the SQLite database")]
     public InArgument<string> DatabasePath { get; set; }
-    
+
     [RequiredArgument]
     [Category("Database")]
     [Description("The database connection object")]
@@ -24,16 +24,20 @@ public class CreateConnection : CodeActivity
 
     protected override void Execute(CodeActivityContext context)
     {
+        // trycatch
         Connection.Set(context, SqliteHelper.CreateConnection(context.GetValue(DatabasePath)));
     }
 }
 
+[DisplayName("CloseConnection")]
+[Description("Closes the connection object")]
 public class CloseConnection : CodeActivity
 {
     [RequiredArgument]
     [Category("Database")]
     [Description("The database connection object")]
     public InArgument<SQLiteConnection> Connection { get; set; }
+
     protected override void Execute(CodeActivityContext context)
     {
         try
@@ -48,18 +52,52 @@ public class CloseConnection : CodeActivity
                 Message = ex.Message
             };
             context.GetExecutorRuntime().LogMessage(message);
+            throw;
         }
     }
 }
 
-public class InsertData : CodeActivity
+[DisplayName("InsertDataTable")]
+[Description("Bulk insert a datatable into a database")]
+public class InsertDataTable : CodeActivity
 {
-    
+    [RequiredArgument]
+    [Category("Database")]
+    [Description("The SQLite Connection object")]
+    public InArgument<SQLiteConnection> Connection { get; set; }
+
+    [RequiredArgument]
+    [Category("Database")]
+    [Description("The DataTable object")]
+    public InArgument<DataTable> DataTable { get; set; }
+
+    [RequiredArgument]
+    [Category("Database")]
+    [Description("The table name in the database")]
+    public InArgument<string> TableName { get; set; }
+
     protected override void Execute(CodeActivityContext context)
     {
-        throw new NotImplementedException();
+        try
+        {
+            SqliteHelper.InsertDataTable(
+                context.GetValue(Connection),
+                context.GetValue(DataTable),
+                context.GetValue(TableName));
+        }
+        catch (Exception ex)
+        {
+            var message = new LogMessage
+            {
+                EventType = TraceEventType.Error,
+                Message = ex.Message
+            };
+            context.GetExecutorRuntime().LogMessage(message);
+            throw new Exception(ex.Message);
+        }
     }
 }
+
 [DisplayName("ExecuteQuery")]
 [Description("Returns a DataTable from a query to the database connection")]
 public class ExecuteQuery : CodeActivity
@@ -73,7 +111,7 @@ public class ExecuteQuery : CodeActivity
     [Category("Database")]
     [Description("The database connection object")]
     public InArgument<SQLiteConnection> Connection { get; set; }
-    
+
     [RequiredArgument]
     [Category("Database")]
     [Description("The result DataTable")]
@@ -81,6 +119,7 @@ public class ExecuteQuery : CodeActivity
 
     protected override void Execute(CodeActivityContext context)
     {
+        // trycatch
         Output.Set(context, SqliteHelper.ExecuteQuery(context.GetValue(Connection), context.GetValue(Query)));
     }
 }
@@ -98,9 +137,10 @@ public class ExecuteNonQuery : CodeActivity
     [Category("Database")]
     [Description("The database connection object")]
     public InArgument<SQLiteConnection> Connection { get; set; }
-    
+
     protected override void Execute(CodeActivityContext context)
     {
+        // trycatch
         SqliteHelper.ExecuteNonQuery(context.GetValue(Command), context.GetValue(Connection));
     }
 }
