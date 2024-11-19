@@ -38,7 +38,7 @@ namespace Ravelaso.UiPath.Sqlite.Tests.Workflow
         }
 
         [Fact]
-        public void TestInsertDataTable()
+        public void TestInsertDataTableCsv()
         {
             // Arrange
             var databasePath = @"C:\Data\Dev\database.db";
@@ -64,5 +64,32 @@ namespace Ravelaso.UiPath.Sqlite.Tests.Workflow
                 Assert.NotNull(outputs);
             });
         }
+        [Fact]
+                public void TestInsertDataTableExcel()
+                {
+                    // Arrange
+                    var databasePath = @"C:\Data\Dev\database.db";
+                    var excelFilePath = @"C:\Data\Dev\demo_table_1k.xlsx";
+                    var tableName = "demo_table";
+        
+                    var dt = Utils.ReadExcelAsDataTable(excelFilePath);
+        
+                    var dbSource = $"Data Source={databasePath}";
+                    using var dbConn = new SQLiteConnection(dbSource);
+                    dbConn.Open();
+                    var insertDataTableActivity = new InsertDataTable()
+                    {
+                        Connection = new InArgument<SQLiteConnection>(dbConn),
+                        TableName = new InArgument<string>(tableName),
+                        DataTable = new InArgument<DataTable>(dt)
+                    };
+                    var workflowInvoker = new WorkflowInvoker(insertDataTableActivity);
+                        
+                    var exception = Record.Exception(() =>
+                    {
+                        var outputs = workflowInvoker.Invoke();
+                        Assert.NotNull(outputs);
+                    });
+                }
     }
 }
