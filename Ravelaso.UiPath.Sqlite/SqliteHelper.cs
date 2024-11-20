@@ -42,9 +42,9 @@ public static class SqliteHelper
             throw new Exception("You need to provide a db connection.");
         }
         
-        if (!dt.Rows.Count.Equals(0))
+        if (dt.Rows.Count.Equals(0))
         {
-            throw new Exception($"Number of rows must be equal to zero.");
+            throw new Exception($"DataTable rows cannot be 0");
         }
         
         if (conn!.State == ConnectionState.Closed)
