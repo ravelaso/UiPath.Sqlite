@@ -16,7 +16,7 @@ public static class SqliteHelper
 
     public static void CloseConnection(SQLiteConnection conn)
     {
-        if(conn.State != ConnectionState.Closed) conn?.Close();
+        if(conn.State != ConnectionState.Closed) conn.Close();
     }
     public static DataTable ExecuteQuery(SQLiteConnection conn, string sql)
     {
@@ -88,7 +88,7 @@ public static class SqliteHelper
             
             transaction.Commit();
         }
-        catch (Exception ex)
+        catch
         {
             transaction.Rollback();
             throw;
@@ -104,35 +104,5 @@ public static class SqliteHelper
         }
         var cmd = new SQLiteCommand(command, conn);
         cmd.ExecuteNonQuery();
-    }
-}
-
-
-public static class Validate
-{
-    public static void ValidateConnection(string fullPath)
-    {
-        if (!File.Exists(fullPath) || fullPath.IndexOf('.') <= 0 ||
-            (fullPath.Split('.').LastOrDefault()?.ToLower() != "db" &&
-             fullPath.Split('.').LastOrDefault()?.ToLower() != "sqlite" &&
-             fullPath.Split('.').LastOrDefault()?.ToLower() != "sqlite3" &&
-             fullPath.Split('.').LastOrDefault()?.ToLower() != "db3"))
-            throw new Exception("The path to the database is invalid. Inform the fully qualified path. The supported databases are: .db, .db3, .sqlite, .sqlite3");
-
-    }
-
-    public static void ValidateDatabaseName(string fullPath)
-    {
-        var directory = fullPath.Substring(0, fullPath.LastIndexOf('\\'));
-        if (!Directory.Exists(directory))
-            throw new Exception("The specified folder is invalid");
-
-        if (fullPath.IndexOf('.') <= 0 ||
-            (fullPath.Split('.').LastOrDefault()?.ToLower() != "db" &&
-             fullPath.Split('.').LastOrDefault()?.ToLower() != "sqlite" &&
-             fullPath.Split('.').LastOrDefault()?.ToLower() != "sqlite3" &&
-             fullPath.Split('.').LastOrDefault()?.ToLower() != "db3"))
-            throw new Exception("The supported database extensions are: .db, .db3, .sqlite, .sqlite3");
-
     }
 }

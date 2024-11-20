@@ -24,8 +24,20 @@ public class CreateConnection : CodeActivity
 
     protected override void Execute(CodeActivityContext context)
     {
-        // trycatch
-        Connection.Set(context, SqliteHelper.CreateConnection(context.GetValue(DatabasePath)));
+        try
+        {
+            Connection.Set(context, SqliteHelper.CreateConnection(context.GetValue(DatabasePath)));
+        }
+        catch (Exception ex)
+        {
+            var message = new LogMessage
+            {
+                EventType = TraceEventType.Error,
+                Message = ex.Message
+            };
+            context.GetExecutorRuntime().LogMessage(message);
+            throw new Exception(ex.Message);
+        }
     }
 }
 
@@ -119,8 +131,20 @@ public class ExecuteQuery : CodeActivity
 
     protected override void Execute(CodeActivityContext context)
     {
-        // trycatch
-        Output.Set(context, SqliteHelper.ExecuteQuery(context.GetValue(Connection), context.GetValue(Query)));
+        try
+        {
+            Output.Set(context, SqliteHelper.ExecuteQuery(context.GetValue(Connection),context.GetValue(Query)));
+        }
+        catch (Exception ex)
+        {
+            var message = new LogMessage
+            {
+                EventType = TraceEventType.Error,
+                Message = ex.Message
+            };
+            context.GetExecutorRuntime().LogMessage(message);
+            throw new Exception(ex.Message);
+        }
     }
 }
 
@@ -140,7 +164,19 @@ public class ExecuteNonQuery : CodeActivity
 
     protected override void Execute(CodeActivityContext context)
     {
-        // trycatch
-        SqliteHelper.ExecuteNonQuery(context.GetValue(Command), context.GetValue(Connection));
+        try
+        {
+            SqliteHelper.ExecuteNonQuery(context.GetValue(Command), context.GetValue(Connection));
+        }
+        catch (Exception ex)
+        {
+            var message = new LogMessage
+            {
+                EventType = TraceEventType.Error,
+                Message = ex.Message
+            };
+            context.GetExecutorRuntime().LogMessage(message);
+            throw new Exception(ex.Message);
+        }
     }
 }
