@@ -1,14 +1,4 @@
--- CREATE TABLE demo_table  (
---                             id INTEGER PRIMARY KEY,     -- Unique identifier for each record
---                             name TEXT NOT NULL,         -- String data type for names
---                             age INTEGER,                -- Integer data type for age
---                             salary REAL,                -- Floating point number for salary
---                             hire_date DATE,             -- Date data type for hire date
---                             email TEXT UNIQUE,          -- String data type for email, which must be unique
---                             is_active INTEGER DEFAULT 1 -- Boolean-like integer to represent active status (1 for active, 0 for inactive)
--- );                                   
-
-
+-- TEST DATA 
 create table demo_table (
                             name VARCHAR(50),
                             email VARCHAR(50),

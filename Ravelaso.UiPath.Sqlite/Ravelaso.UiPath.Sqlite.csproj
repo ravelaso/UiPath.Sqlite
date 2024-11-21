@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10"/>
         <PackageReference Include="System.Activities.ViewModels" Version="1.0.0-20230919.1"/>
         <PackageReference Include="System.Data.SQLite" Version="1.0.119" PrivateAssets="none"/>
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" PrivateAssets="none"/>
