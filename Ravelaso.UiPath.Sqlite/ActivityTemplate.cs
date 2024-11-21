@@ -15,7 +15,7 @@ public class CreateConnection : CodeActivity
     [RequiredArgument]
     [Category("Database")]
     [Description("The name of the SQLite database")]
-    public InArgument<string> DatabasePath { get; set; }
+    public InArgument<string> DatabasePath { get; init; }
 
     [RequiredArgument]
     [Category("Database")]
@@ -76,17 +76,17 @@ public class InsertDataTable : CodeActivity
     [RequiredArgument]
     [Category("Database")]
     [Description("The SQLite Connection object")]
-    public InArgument<SQLiteConnection> Connection { get; set; }
+    public InArgument<SQLiteConnection> Connection { get; init; }
 
     [RequiredArgument]
     [Category("Database")]
     [Description("The DataTable object")]
-    public InArgument<DataTable> DataTable { get; set; }
+    public InArgument<DataTable> DataTable { get; init; }
 
     [RequiredArgument]
     [Category("Database")]
     [Description("The table name in the database")]
-    public InArgument<string> TableName { get; set; }
+    public InArgument<string> TableName { get; init; }
 
     protected override void Execute(CodeActivityContext context)
     {
@@ -155,12 +155,12 @@ public class ExecuteNonQuery : CodeActivity
     [RequiredArgument]
     [Category("Database")]
     [Description("The sql non query command")]
-    public InArgument<string> Command { get; set; }
+    public InArgument<string> Command { get; init; }
 
     [RequiredArgument]
     [Category("Database")]
     [Description("The database connection object")]
-    public InArgument<SQLiteConnection> Connection { get; set; }
+    public InArgument<SQLiteConnection> Connection { get; init; }
 
     protected override void Execute(CodeActivityContext context)
     {
