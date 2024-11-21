@@ -32,6 +32,7 @@ public static class SqliteHelper
         dt.BeginLoadData();
         dt.Load(dr);
         dt.EndLoadData();
+        conn.Close();
         return dt;
     }
 
@@ -87,6 +88,7 @@ public static class SqliteHelper
             }
             
             transaction.Commit();
+            conn.Close();
         }
         catch
         {
@@ -104,5 +106,6 @@ public static class SqliteHelper
         }
         var cmd = new SQLiteCommand(command, conn);
         cmd.ExecuteNonQuery();
+        conn.Close();
     }
 }
