@@ -1,19 +1,21 @@
 using System.Data;
 using System.Data.SQLite;
+using System.Reflection;
 using System.Text;
 
 namespace Ravelaso.UiPath.Sqlite;
 
 public static class SqliteHelper
 {
+    
     public static SQLiteConnection CreateConnection(string databasePath)
     {
+        DependencyLoader.LoadInterop();
         var conn = new SQLiteConnection($"Data Source={databasePath}");
         conn.ParseViaFramework = true;
         conn.Open();
         return conn;
     }
-
     public static void CloseConnection(SQLiteConnection conn)
     {
         if(conn.State != ConnectionState.Closed) conn.Close();
@@ -35,7 +37,6 @@ public static class SqliteHelper
         conn.Close();
         return dt;
     }
-
     public static void InsertDataTable(SQLiteConnection conn, DataTable dt, string tableName)
     {
         if (conn == null)
