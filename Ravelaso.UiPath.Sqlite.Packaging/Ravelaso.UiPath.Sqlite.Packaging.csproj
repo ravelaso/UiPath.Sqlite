@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -32,12 +33,6 @@
         </ItemGroup>
     </Target>
 
-<!--    <Target Name="RemoveMetaDll" AfterTargets="BuiltProjectOutputGroup">-->
-<!--        <ItemGroup>-->
-<!--            <BuiltProjectOutputGroupOutput Remove="@(BuiltProjectOutputGroupOutput)"/>-->
-<!--        </ItemGroup>-->
-<!--    </Target>-->
-
     <Target Name="CleanPackageFiles" BeforeTargets="Build">
         <Message Text="Deleting packages ..."/>
         <ItemGroup>
@@ -52,15 +47,7 @@
         </ProjectReference>
         <None Include="images\UI_icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
-
     <ItemGroup>
-      <PackageReference Include="System.Data.SQLite" Version="1.0.119" PrivateAssets="none"/>
-      <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" PrivateAssets="none"/>
+      <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
     </ItemGroup>
-    <PropertyGroup>
-        <ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
-        <CopySQLiteInteropFiles>false</CopySQLiteInteropFiles>
-        <CleanSQLiteInteropFiles>false</CleanSQLiteInteropFiles>
-        <CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
-    </PropertyGroup>
 </Project>
