@@ -12,11 +12,12 @@ namespace Ravelaso.UiPath.Sqlite
             var interopFileName = "SQLite.Interop.dll";
             var assembly = Assembly.GetExecutingAssembly();
             var assemblyName = assembly.GetName().Name;
+            var env = Environment.Is64BitProcess ? "x64" : "x86";
 
-            var resource = $"{assemblyName}.Resources.{interopFileName}";
+            var resource = $"{assemblyName}.Resources.{env}.{interopFileName}";
 
             var assemblyDirectory = Path.GetDirectoryName(assembly.Location);
-            var interopFilePath = Path.Combine(assemblyDirectory, interopFileName);
+            var interopFilePath = Path.Combine(assemblyDirectory!, interopFileName);
 
             using (var stream = assembly.GetManifestResourceStream(resource))
             {
@@ -30,7 +31,6 @@ namespace Ravelaso.UiPath.Sqlite
                     stream.CopyTo(fs);
                 }
             }
-
             // Load the DLL into the process
             LoadLibrary(interopFilePath);
         }

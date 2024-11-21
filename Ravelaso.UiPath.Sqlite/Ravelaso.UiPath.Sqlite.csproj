@@ -9,11 +9,13 @@
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Resources\ActivitiesMetadata.json" />
-        <None Remove="Resources\SQLite.Interop.dll" />
+        <None Remove="Resources\x64\SQLite.Interop.dll" />
+        <None Remove="Resources\x86\SQLite.Interop.dll" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Include="Resources\ActivitiesMetadata.json" />
-        <EmbeddedResource Include="Resources\SQLite.Interop.dll" />
+        <EmbeddedResource Include="Resources\x64\SQLite.Interop.dll" />
+        <EmbeddedResource Include="Resources\x86\SQLite.Interop.dll" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="System.Activities.ViewModels" Version="1.0.0-20230919.1" />
@@ -36,10 +38,6 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <CustomToolNamespace>Ravelaso.UiPath.Sqlite</CustomToolNamespace>
         </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Resources\Icons\" />
     </ItemGroup>
 
 </Project>
