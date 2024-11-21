@@ -6,6 +6,10 @@ namespace Ravelaso.UiPath.Sqlite;
 
 public static class SqliteHelper
 {
+    static SqliteHelper()
+    {
+        DependencyLoader.LoadInterop();
+    }
     public static SQLiteConnection CreateConnection(string databasePath)
     {
         var conn = new SQLiteConnection($"Data Source={databasePath}");
@@ -13,7 +17,6 @@ public static class SqliteHelper
         conn.Open();
         return conn;
     }
-
     public static void CloseConnection(SQLiteConnection conn)
     {
         if(conn.State != ConnectionState.Closed) conn.Close();
@@ -32,9 +35,9 @@ public static class SqliteHelper
         dt.BeginLoadData();
         dt.Load(dr);
         dt.EndLoadData();
+        conn.Close();
         return dt;
     }
-
     public static void InsertDataTable(SQLiteConnection conn, DataTable dt, string tableName)
     {
         if (conn == null)
@@ -87,6 +90,7 @@ public static class SqliteHelper
             }
             
             transaction.Commit();
+            conn.Close();
         }
         catch
         {
@@ -104,5 +108,7 @@ public static class SqliteHelper
         }
         var cmd = new SQLiteCommand(command, conn);
         cmd.ExecuteNonQuery();
+        conn.Close();
     }
+    
 }

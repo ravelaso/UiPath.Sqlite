@@ -5,29 +5,24 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>Ravelaso.UiPath.Sqlite.Activities</PackageId>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <None Remove="Resources\ActivitiesMetadata.json"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Include="Resources\ActivitiesMetadata.json"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="System.Activities.ViewModels" Version="1.0.0-20230919.1"/>
-        <PackageReference Include="System.Data.SQLite" Version="1.0.119" PrivateAssets="none"/>
-        <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" PrivateAssets="none"/>
-        <PackageReference Include="UiPath.Activities.Api" Version="23.10.3" PrivateAssets="All"/>
-        <PackageReference Include="UiPath.Workflow" Version="6.0.0-20231211-03"/>
-    </ItemGroup>
-    <PropertyGroup>
         <ContentSQLiteInteropFiles>true</ContentSQLiteInteropFiles>
-        <CopySQLiteInteropFiles>false</CopySQLiteInteropFiles>
-        <CleanSQLiteInteropFiles>false</CleanSQLiteInteropFiles>
-        <CollectSQLiteInteropFiles>false</CollectSQLiteInteropFiles>
     </PropertyGroup>
+    <ItemGroup>
+        <None Remove="Resources\ActivitiesMetadata.json" />
+        <None Remove="Resources\x64\SQLite.Interop.dll" />
+        <None Remove="Resources\x86\SQLite.Interop.dll" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\ActivitiesMetadata.json" />
+        <EmbeddedResource Include="Resources\x64\SQLite.Interop.dll" />
+        <EmbeddedResource Include="Resources\x86\SQLite.Interop.dll" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Activities.ViewModels" Version="1.0.0-20230919.1" />
+        <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+        <PackageReference Include="UiPath.Activities.Api" Version="23.10.3" />
+        <PackageReference Include="UiPath.Workflow" Version="6.0.0-20231211-03" />
+    </ItemGroup>
     <ItemGroup>
         <Compile Update="Resources\Resources.Designer.cs">
             <DependentUpon>Resources.resx</DependentUpon>
@@ -43,10 +38,6 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <CustomToolNamespace>Ravelaso.UiPath.Sqlite</CustomToolNamespace>
         </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Resources\Icons\"/>
     </ItemGroup>
 
 </Project>
