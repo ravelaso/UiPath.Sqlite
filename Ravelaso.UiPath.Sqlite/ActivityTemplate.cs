@@ -8,6 +8,14 @@ using UiPath.Robot.Activities.Api;
 
 namespace Ravelaso.UiPath.Sqlite;
 
+public class TestActivity : NativeActivity
+{
+    protected override void Execute(NativeActivityContext context)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 [DisplayName("CreateConnection")]
 [Description("Creates a connection object for the SQLite database")]
 public class CreateConnection : CodeActivity
