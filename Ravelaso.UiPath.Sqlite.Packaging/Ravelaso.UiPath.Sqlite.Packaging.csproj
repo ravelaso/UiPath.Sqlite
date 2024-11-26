@@ -26,26 +26,28 @@
     <Target Name="AddDlls">
         <!-- PDBs for debug-->
         <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-            <BuildOutputInPackage Include="$(OutputPath)Ravelaso.UiPath.Sqlite.pdb"/>
+            <BuildOutputInPackage Include="$(OutputPath)Ravelaso.UiPath.Sqlite.pdb" />
         </ItemGroup>
         <ItemGroup>
-            <BuildOutputInPackage Include="$(OutputPath)Ravelaso.UiPath.Sqlite.dll"/>
+            <BuildOutputInPackage Include="$(OutputPath)Ravelaso.UiPath.Sqlite.dll" />
+            <BuildOutputInPackage Include="$(OutputPath)Ravelaso.UiPath.Sqlite.Design.dll" />
         </ItemGroup>
     </Target>
 
     <Target Name="CleanPackageFiles" BeforeTargets="Build">
-        <Message Text="Deleting packages ..."/>
+        <Message Text="Deleting packages ..." />
         <ItemGroup>
-            <PackageFilesToDelete Include="$(PackageOutputPath)\$(PackageId)*.nupkg"/>
+            <PackageFilesToDelete Include="$(PackageOutputPath)\$(PackageId)*.nupkg" />
         </ItemGroup>
-        <Delete Files="@(PackageFilesToDelete)" ContinueOnError="WarnAndContinue"/>
+        <Delete Files="@(PackageFilesToDelete)" ContinueOnError="WarnAndContinue" />
     </Target>
 
     <ItemGroup>
+        <ProjectReference Include="..\Ravelaso.UiPath.Sqlite.Design\Ravelaso.UiPath.Sqlite.Design.csproj" />
         <ProjectReference Include="..\Ravelaso.UiPath.Sqlite\Ravelaso.UiPath.Sqlite.csproj">
             <PrivateAssets>All</PrivateAssets>
         </ProjectReference>
-        <None Include="images\UI_icon.png" Pack="true" PackagePath=""/>
+        <None Include="images\UI_icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />

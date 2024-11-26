@@ -13,4 +13,5 @@
     <ItemGroup>
       <ProjectReference Include="..\Ravelaso.UiPath.Sqlite\Ravelaso.UiPath.Sqlite.csproj" />
     </ItemGroup>
+    <Import Project="..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>
