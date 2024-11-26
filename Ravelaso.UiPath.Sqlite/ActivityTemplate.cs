@@ -8,9 +8,10 @@ using UiPath.Robot.Activities.Api;
 
 namespace Ravelaso.UiPath.Sqlite;
 
-public class TestActivity : NativeActivity
+[DisplayName("TestActivity")]
+public class TestActivity : CodeActivity
 {
-    protected override void Execute(NativeActivityContext context)
+    protected override void Execute(CodeActivityContext context)
     {
         throw new NotImplementedException();
     }

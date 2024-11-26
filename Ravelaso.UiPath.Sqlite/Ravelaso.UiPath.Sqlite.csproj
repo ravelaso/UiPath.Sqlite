@@ -39,5 +39,5 @@
             <CustomToolNamespace>Ravelaso.UiPath.Sqlite</CustomToolNamespace>
         </EmbeddedResource>
     </ItemGroup>
-
+    
 </Project>
