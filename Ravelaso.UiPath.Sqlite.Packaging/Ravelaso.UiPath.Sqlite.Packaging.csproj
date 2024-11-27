@@ -21,6 +21,12 @@
         <PackageOutputPath>..\Output\Activities\Packages\</PackageOutputPath>
         <TargetsForTfmSpecificBuildOutput>AddDlls</TargetsForTfmSpecificBuildOutput>
         <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+        <PackageReleaseNotes>Added Insert DataTable Activity.</PackageReleaseNotes>
+        <Description>
+            SQLite Activities for UiPath
+        </Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     </PropertyGroup>
 
     <Target Name="AddDlls">
@@ -46,6 +52,8 @@
             <PrivateAssets>All</PrivateAssets>
         </ProjectReference>
         <None Include="images\UI_icon.png" Pack="true" PackagePath=""/>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\LICENSE.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
