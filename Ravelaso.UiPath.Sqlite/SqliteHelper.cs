@@ -80,15 +80,15 @@ public static class SqliteHelper
 
                     // Escape column names by wrapping them in double quotes
                     columnNames.Append($"\"{column.ColumnName}\"");
-                    parameterNames.Append($"@{column.ColumnName}");
+                    parameterNames.Append($"{column.ColumnName}");
                 }
 
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
 
                 // Iterate through the rows starting from the second row (index 1)
-                for (int i = 1; i < dt.Rows.Count; i++)
+                for (var i = 1; i < dt.Rows.Count; i++)
                 {
-                    DataRow row = dt.Rows[i];
+                    var row = dt.Rows[i];
                     command.Parameters.Clear();
 
                     foreach (DataColumn column in dt.Columns)
@@ -96,7 +96,7 @@ public static class SqliteHelper
                         var parameterName = $"@{column.ColumnName}";
                         command.Parameters.AddWithValue(parameterName, row[column]);
                     }
-
+                
                     command.ExecuteNonQuery();
                 }
             }
