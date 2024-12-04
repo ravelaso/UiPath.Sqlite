@@ -69,7 +69,8 @@ public static class SqliteHelper
                         columnNames.Append(", ");
                         parameterNames.Append(", ");
                     }
-                    columnNames.Append(column.ColumnName);
+                    // Escape column names by wrapping them in double quotes
+                    columnNames.Append($"\"{column.ColumnName}\"");
                     parameterNames.Append($"@{column.ColumnName}");
                 }
                 
