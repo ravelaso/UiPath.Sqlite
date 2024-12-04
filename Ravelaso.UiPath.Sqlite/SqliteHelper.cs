@@ -70,7 +70,7 @@ public static class SqliteHelper
                     }
                     // Escape column names by wrapping them in double quotes
                     columnNames.Append($"\"{column.ColumnName}\"");
-                    parameterNames.Append($"@{column.ColumnName}");
+                    parameterNames.Append($"\"@{column.ColumnName}\"");
                 }
             
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
@@ -81,7 +81,7 @@ public static class SqliteHelper
                 
                     foreach (DataColumn column in dt.Columns)
                     {
-                        var parameterName = $"@{column.ColumnName}";
+                        var parameterName = $"{column.ColumnName}";
                         command.Parameters.AddWithValue(parameterName, row[column]);
                     }
                 
