@@ -10,6 +10,7 @@ public static class SqliteHelper
     {
         DependencyLoader.LoadInterop();
     }
+
     public static SQLiteConnection CreateConnection(string databasePath)
     {
         var conn = new SQLiteConnection($"Data Source={databasePath}");
@@ -17,10 +18,12 @@ public static class SqliteHelper
         conn.Open();
         return conn;
     }
+
     public static void CloseConnection(SQLiteConnection conn)
     {
-        if(conn.State != ConnectionState.Closed) conn.Close();
+        if (conn.State != ConnectionState.Closed) conn.Close();
     }
+
     public static DataTable ExecuteQuery(SQLiteConnection conn, string sql)
     {
         if (conn == null && string.IsNullOrWhiteSpace(sql))
@@ -29,6 +32,7 @@ public static class SqliteHelper
         {
             conn.Open();
         }
+
         var cmd = new SQLiteCommand(sql, conn);
         using var dr = cmd.ExecuteReader();
         var dt = new DataTable();
@@ -37,22 +41,24 @@ public static class SqliteHelper
         dt.EndLoadData();
         return dt;
     }
+
     public static void InsertDataTable(SQLiteConnection conn, DataTable dt, string tableName)
     {
         if (conn == null)
         {
             throw new Exception("You need to provide a db connection.");
         }
-    
+
         if (dt.Rows.Count.Equals(0))
         {
             throw new Exception("DataTable rows cannot be 0");
         }
-    
+
         if (conn.State == ConnectionState.Closed)
         {
             conn.Open();
         }
+
         using var transaction = conn.BeginTransaction();
         try
         {
@@ -60,7 +66,10 @@ public static class SqliteHelper
             {
                 var columnNames = new StringBuilder();
                 var parameterNames = new StringBuilder();
-            
+
+                // Assuming the first row contains the headers
+                var headerRow = dt.Rows[0];
+
                 foreach (DataColumn column in dt.Columns)
                 {
                     if (columnNames.Length > 0)
@@ -68,27 +77,30 @@ public static class SqliteHelper
                         columnNames.Append(", ");
                         parameterNames.Append(", ");
                     }
+
                     // Escape column names by wrapping them in double quotes
                     columnNames.Append($"\"{column.ColumnName}\"");
-                    parameterNames.Append($"\"@{column.ColumnName}\"");
+                    parameterNames.Append($"@{column.ColumnName}");
                 }
-            
+
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
-            
-                foreach (DataRow row in dt.Rows)
+
+                // Iterate through the rows starting from the second row (index 1)
+                for (int i = 1; i < dt.Rows.Count; i++)
                 {
+                    DataRow row = dt.Rows[i];
                     command.Parameters.Clear();
-                
+
                     foreach (DataColumn column in dt.Columns)
                     {
-                        var parameterName = $"{column.ColumnName}";
+                        var parameterName = $"@{column.ColumnName}";
                         command.Parameters.AddWithValue(parameterName, row[column]);
                     }
-                
+
                     command.ExecuteNonQuery();
                 }
             }
-        
+
             transaction.Commit();
         }
         catch (Exception ex)
@@ -97,6 +109,7 @@ public static class SqliteHelper
             throw new Exception($"Error inserting data into {tableName}: {ex.Message}", ex);
         }
     }
+
     public static void ExecuteNonQuery(string command, SQLiteConnection conn)
     {
         if (conn == null && string.IsNullOrWhiteSpace(command))
@@ -105,6 +118,7 @@ public static class SqliteHelper
         {
             conn.Open();
         }
+
         var cmd = new SQLiteCommand(command, conn);
         cmd.ExecuteNonQuery();
     }
