@@ -43,25 +43,24 @@ public static class SqliteHelper
         {
             throw new Exception("You need to provide a db connection.");
         }
-        
+    
         if (dt.Rows.Count.Equals(0))
         {
-            throw new Exception($"DataTable rows cannot be 0");
+            throw new Exception("DataTable rows cannot be 0");
         }
-        
-        if (conn!.State == ConnectionState.Closed)
+    
+        if (conn.State == ConnectionState.Closed)
         {
             conn.Open();
         }
         using var transaction = conn.BeginTransaction();
         try
         {
-            
             using (var command = conn.CreateCommand())
             {
                 var columnNames = new StringBuilder();
                 var parameterNames = new StringBuilder();
-                
+            
                 foreach (DataColumn column in dt.Columns)
                 {
                     if (columnNames.Length > 0)
@@ -73,28 +72,29 @@ public static class SqliteHelper
                     columnNames.Append($"\"{column.ColumnName}\"");
                     parameterNames.Append($"@{column.ColumnName}");
                 }
-                
+            
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
-                
+            
                 foreach (DataRow row in dt.Rows)
                 {
                     command.Parameters.Clear();
-                    
+                
                     foreach (DataColumn column in dt.Columns)
                     {
-                        command.Parameters.AddWithValue($"@{column.ColumnName}", row[column]);
+                        var parameterName = $"@{column.ColumnName}";
+                        command.Parameters.AddWithValue(parameterName, row[column]);
                     }
-                    
+                
                     command.ExecuteNonQuery();
                 }
             }
-            
+        
             transaction.Commit();
         }
-        catch
+        catch (Exception ex)
         {
             transaction.Rollback();
-            throw;
+            throw new Exception($"Error inserting data into {tableName}: {ex.Message}", ex);
         }
     }
     public static void ExecuteNonQuery(string command, SQLiteConnection conn)
