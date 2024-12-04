@@ -56,11 +56,12 @@ public static class SqliteHelper
         using var transaction = conn.BeginTransaction();
         try
         {
+            
             using (var command = conn.CreateCommand())
             {
                 var columnNames = new StringBuilder();
                 var parameterNames = new StringBuilder();
-
+                
                 foreach (DataColumn column in dt.Columns)
                 {
                     if (columnNames.Length > 0)
@@ -68,32 +69,31 @@ public static class SqliteHelper
                         columnNames.Append(", ");
                         parameterNames.Append(", ");
                     }
-                    columnNames.Append($"\"{column.ColumnName}\"");
-                    parameterNames.Append($"\"${column.ColumnName}\"");
+                    columnNames.Append(column.ColumnName);
+                    parameterNames.Append($"@{column.ColumnName}");
                 }
-
+                
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
-
-                for (var i = 0; i < dt.Rows.Count; i++)
+                
+                foreach (DataRow row in dt.Rows)
                 {
-                    var row = dt.Rows[i];
                     command.Parameters.Clear();
-
+                    
                     foreach (DataColumn column in dt.Columns)
                     {
-                        var parameterName = $"${column.ColumnName}";
-                        command.Parameters.AddWithValue(parameterName, row[column]);
+                        command.Parameters.AddWithValue($"@{column.ColumnName}", row[column]);
                     }
+                    
                     command.ExecuteNonQuery();
                 }
             }
-
+            
             transaction.Commit();
         }
-        catch (Exception ex)
+        catch 
         {
             transaction.Rollback();
-            throw new Exception($"Error inserting data into {tableName}: {ex.Message}", ex);
+            throw;
         }
     }
     public static void ExecuteNonQuery(string command, SQLiteConnection conn)
