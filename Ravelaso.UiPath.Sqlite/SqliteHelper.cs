@@ -69,22 +69,21 @@ public static class SqliteHelper
                         parameterNames.Append(", ");
                     }
                     columnNames.Append($"\"{column.ColumnName}\"");
-                    parameterNames.Append($":{column.ColumnName}");
+                    parameterNames.Append($"\"${column.ColumnName}\"");
                 }
 
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
 
-                for (int i = 0; i < dt.Rows.Count; i++)
+                for (var i = 0; i < dt.Rows.Count; i++)
                 {
-                    DataRow row = dt.Rows[i];
+                    var row = dt.Rows[i];
                     command.Parameters.Clear();
 
                     foreach (DataColumn column in dt.Columns)
                     {
-                        var parameterName = $":{column.ColumnName}";
+                        var parameterName = $"${column.ColumnName}";
                         command.Parameters.AddWithValue(parameterName, row[column]);
                     }
-
                     command.ExecuteNonQuery();
                 }
             }
