@@ -76,9 +76,9 @@ namespace Ravelaso.UiPath.Sqlite.Tests.Workflow
         public void TestInsertDataTableCsv()
         {
             // Arrange
-            var databasePath = @"C:\Data\Dev\testdb.db";
-            var excelFilePath = @"C:\Data\Dev\demo_table.csv";
-            var tableName = "demo_table";
+            var databasePath = @"C:\Data\RPA\TestMatchedFined.db";
+            var excelFilePath = @"C:\Data\RPA\Boetes_2024-10-11T16_30_20.3953613Z.csv";
+            var tableName = "Fines";
 
             var dt = Utils.ReadCsvAsDataTable(excelFilePath);
 

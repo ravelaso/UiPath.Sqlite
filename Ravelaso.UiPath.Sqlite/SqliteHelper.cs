@@ -69,8 +69,8 @@ public static class SqliteHelper
                         columnNames.Append(", ");
                         parameterNames.Append(", ");
                     }
-                    columnNames.Append(column.ColumnName);
-                    parameterNames.Append($"@{column.ColumnName}");
+                    columnNames.Append($"\"{column.ColumnName}\"");
+                    parameterNames.Append($"@{SanitizeParameterName(column.ColumnName)}");
                 }
                 
                 command.CommandText = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
@@ -81,9 +81,8 @@ public static class SqliteHelper
                     
                     foreach (DataColumn column in dt.Columns)
                     {
-                        command.Parameters.AddWithValue($"@{column.ColumnName}", row[column]);
+                        command.Parameters.AddWithValue($"@{SanitizeParameterName(column.ColumnName)}", row[column]);
                     }
-                    
                     command.ExecuteNonQuery();
                 }
             }
@@ -106,5 +105,22 @@ public static class SqliteHelper
         }
         var cmd = new SQLiteCommand(command, conn);
         cmd.ExecuteNonQuery();
+    }
+    
+    private static string SanitizeParameterName(string columnName)
+    {
+        // Define a list of characters to be removed or replaced
+        var invalidChars = new[] { '[', ']', ' ', '-', '.', ',', ';', ':', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', '{', '}', '|', '\\', '/', '<', '>', '?', '~', '`' };
+
+        // Replace invalid characters with an underscore
+        columnName = invalidChars.Aggregate(columnName, (current, ch) => current.Replace(ch, '_'));
+
+        // Ensure the parameter name starts with a valid character
+        if (char.IsDigit(columnName[0]))
+        {
+            columnName = "_" + columnName;
+        }
+
+        return columnName;
     }
 }
