@@ -12,16 +12,18 @@
         <VersionBuild>$([System.DateTime]::UtcNow.DayOfYear.ToString("F0"))</VersionBuild>
         <VersionRevision>$([System.DateTime]::UtcNow.TimeOfDay.TotalMinutes.ToString("F0"))</VersionRevision>
         <PackageId>Ravelaso.UiPath.Sqlite</PackageId>
-        <VersionPrefix Condition="'$(Configuration)' == 'Release'">1.0.4</VersionPrefix>
+        <VersionPrefix Condition="'$(Configuration)' == 'Release'">1.0.5</VersionPrefix>
         <VersionPrefix Condition="'$(Configuration)' == 'Debug'">1.0.$(VersionBuild)-dev.$(VersionRevision)</VersionPrefix>
         <Authors>Ravelaso</Authors>
+        <RepositoryUrl>https://github.com/ravelaso/UiPath.Sqlite</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
         <PackageTags>UiPathDatabase</PackageTags>
         <Product>Ravelaso.UiPath.Sqlite.Packaging</Product>
         <PackageIcon>UI_icon.png</PackageIcon>
         <PackageOutputPath>..\Output\Activities\Packages\</PackageOutputPath>
         <TargetsForTfmSpecificBuildOutput>AddDlls</TargetsForTfmSpecificBuildOutput>
         <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-        <PackageReleaseNotes>Parsing of parameters, corrected.</PackageReleaseNotes>
+        <PackageReleaseNotes>Minor fixes</PackageReleaseNotes>
         <Description>
             SQLite Activities for UiPath
         </Description>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Ravelaso.UiPath.Sqlite
@@ -34,7 +32,7 @@ namespace Ravelaso.UiPath.Sqlite
             LoadLibrary(interopFilePath);
         }
 
-        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern IntPtr LoadLibrary(string lpFileName);
     }
 }
